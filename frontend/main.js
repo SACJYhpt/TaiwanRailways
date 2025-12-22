@@ -191,7 +191,7 @@ function start(){
                 waitTime = 25; 
             }
 
-            const url = `http://localhost:3000/api/search?start=${startStation}&end=${endStation}&time=${finalISOString}&waitTime=${waitTime}&HSRok=${hsrCheck}`;
+            const url = `/api/search?start=${startStation}&end=${endStation}&time=${finalISOString}&waitTime=${waitTime}&HSRok=${hsrCheck}`;
 
             fetch(url)
                 .then(res => res.json())
@@ -205,7 +205,7 @@ function start(){
         }
         else{
             const op = document.querySelector('input[name="op"]:checked').value;
-            const url = `http://localhost:3000/api/timetable?start=${startStation}&end=${endStation}&time=${finalISOString}&op=${op}`;
+            const url = `/api/timetable?start=${startStation}&end=${endStation}&time=${finalISOString}&op=${op}`;
 
             fetch(url)
                 .then(res => res.json())
