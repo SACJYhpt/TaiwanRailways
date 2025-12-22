@@ -8,16 +8,16 @@ const cityList = {
 
 const stationList = {
         "常用":[],
-        "高鐵":["1|南港", "2|臺北", "3|板橋", "4|南港", "5|新竹", "6|苗栗", "7|臺中", "8|彰化", "9|雲林", "10|嘉義", "11|臺南", "12|左營"],
+        "高鐵":["1|高鐵南港", "2|高鐵臺北", "3|高鐵板橋", "4|高鐵南港", "5|高鐵新竹", "6|高鐵苗栗", "7|高鐵臺中", "8|高鐵彰化", "9|高鐵雲林", "10|高鐵嘉義", "11|高鐵臺南", "12|高鐵左營"],
         "基隆市": ["0900|基隆", "0910|三坑", "0920|八堵", "0930|七堵", "0940|百福", "7361|海科館", "7390|暖暖"],
         "新北市": ["0950|五堵", "0960|汐止", "0970|汐科", "1020|板橋", "1030|浮洲", "1040|樹林", "1050|南樹林", "1060|山佳", "1070|鶯歌", "1075|鳳鳴", "7290|福隆", "7300|貢寮", "7310|雙溪", "7320|牡丹", "7330|三貂嶺", "7331|大華", "7332|十分", "7333|望古", "7334|嶺腳", "7335|平溪", "7336|菁桐", "7350|侯硐", "7360|瑞芳", "7362|八斗子", "7380|四腳亭"],
         "臺北市": ["0980|南港", "0990|松山", "1000|臺北", "1010|萬華"],
         "桃園市": ["1080|桃園", "1090|內壢", "1100|中壢", "1110|埔心", "1120|楊梅", "1130|富岡", "1140|新富"],
-        "新竹縣": ["1050|北湖", "1060|湖口", "1070|新豐", "1080|竹北", "1093|竹中", "1094|六家", "1201|上員", "1202|榮華", "1203|竹東", "1204|橫山", "1205|九讚頭", "1206|合興", "1207|富貴", "1208|內灣"],
+        "新竹縣": ["1050|北湖", "1060|湖口", "1070|新豐", "1080|竹北", "1193|竹中", "1194|六家", "1201|上員", "1202|榮華", "1203|竹東", "1204|橫山", "1205|九讚頭", "1206|合興", "1207|富貴", "1208|內灣"],
         "新竹市": ["1190|北新竹", "1191|千甲", "1192|新莊", "1210|新竹", "1220|三姓橋", "1230|香山"],
         "苗栗縣": ["1240|崎頂", "150|竹南", "2110|談文", "2120|大山", "2130|後龍", "2140|龍港", "2150|白沙屯", "2160|新埔", "2170|通宵", "2180|苑裡", "3140|造橋", "3150|豐富", "3160|苗栗", "3170|南勢", "3180|銅鑼", "3190|三義"],
-        "臺中市": ["2190|日南", "2200|大甲", "2210|臺中港", "2220|清水", "2230|沙鹿", "2240|龍井", "2250|大肚", "2260|追分", "3210|泰安", "3220|后里", "3230|豐原", "3240|栗林", "3250|潭子", "3260|頭家厝", "3270|松竹", "3280|太原", "3290|精武", "3300|臺中", "3310|五權", "3320|大慶", "3330烏日", "3340|新烏日", "3350|成功"],
-        "彰化縣": ["3360|彰化", "3370|花壇", "3380|大村", "3390|員林", "3400永靖", "3410社頭", "3420田中", "3430二水", "3431源泉"],
+        "臺中市": ["2190|日南", "2200|大甲", "2210|臺中港", "2220|清水", "2230|沙鹿", "2240|龍井", "2250|大肚", "2260|追分", "3210|泰安", "3220|后里", "3230|豐原", "3240|栗林", "3250|潭子", "3260|頭家厝", "3270|松竹", "3280|太原", "3290|精武", "3300|臺中", "3310|五權", "3320|大慶", "3330|烏日", "3340|新烏日", "3350|成功"],
+        "彰化縣": ["3360|彰化", "3370|花壇", "3380|大村", "3390|員林", "3400|永靖", "3410|社頭", "3420|田中", "3430|二水", "3431|源泉"],
         "南投縣": ["3432|濁水", "3433|龍泉", "3434|集集", "3435|水里", "3436|車程"],
         "雲林縣": ["3450|林內", "3460|石榴", "3470|斗六", "3480|斗南", "3490|石龜"],
         "嘉義縣": ["4050|大林", "4060|民雄", "4090|水上", "4100|南靖"],
@@ -30,7 +30,19 @@ const stationList = {
         "宜蘭縣": ["7070|漢本", "7080|武塔", "7090|南澳", "7100|東澳", "7110|永樂", "7120|蘇澳", "7130|蘇澳新", "7150|冬山", "7160|羅東", "7170|中里", "7180|二結", "7190|宜蘭", "7200|四城", "7210|礁溪", "7220|頂埔", "7230|頭城", "7240|外澳", "7250|龜山", "7260|大溪", "7270|大里", "7280|石城"]
     };
 
+let stationNameMap = {};
+
+function createStationNameMap(){
+    for (let region in stationList){
+        stationList[region].forEach(item => {
+            const [id, name] = item.split('|');
+            stationNameMap[id] = name;
+        });
+    }
+}
+
 function start(){
+    createStationNameMap();
     const startCity = document.getElementById("startCity");
     const endCity = document.getElementById("endCity");
     const savedCommon = localStorage.getItem("myCommonStations");
@@ -65,6 +77,15 @@ function start(){
     timeNotNowRadio.addEventListener("change", function() {
         if (this.checked) {
             chooseTimeDiv.innerHTML = '<p class="setThings">請選擇出發時間：</p><input type="datetime-local" id="queryTime">';
+            const queryTimeInput = document.getElementById('queryTime');
+    
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const defaultTime = `${year}-${month}-${day}T00:00`;
+
+            queryTimeInput.value = defaultTime;
         }
     }, false);
 
@@ -74,23 +95,48 @@ function start(){
         }
     }, false);
 
-    const directCheck = document.getElementById("direct");
-    const changeTimeDiv = document.getElementById("changeTimeDiv");
+    const searchRadio = document.getElementById("search");
+    const timeTableRadio = document.getElementById("timeTable");
+    const modeSetDiv = document.getElementById("modeSetDiv");
 
-    directCheck.addEventListener("change", function() {
-        if (this.checked) {
-            changeTimeDiv.innerHTML = '';
-        }
-        else{
-            changeTimeDiv.innerHTML = `
-            <p class="setThings">請選擇轉乘所需時間：</p>
-            <p>
-                <input type="number" class="setChangeTime" id="changeTime" min="1" max="23" step="1" value="0">小時
-                <input type="number" class="setChangeTime" id="changeTime" min="1" max="59" step="1" value="25">分鐘
-            </p>
+    searchRadio.addEventListener("change", function() {
+        if (this.checked){
+            modeSetDiv.innerHTML = `
+                <p><input type="checkbox" name="noHSR" id="noHSR" checked>不搭高鐵</p>
+                <p><input type="checkbox" name="noHSR" id="changeTime">設定轉乘時間(預設25分鐘)</p>
+                <div id="waitTimeDiv"></div>
             `;
         }
+    }, false);
+
+    timeTableRadio.addEventListener("change", function() {
+        if (this.checked){
+            modeSetDiv.innerHTML = `
+                <p>
+                    查詢種類：
+                    <input type="radio" name="op" value="tra" checked>臺鐵
+                    <input type="radio" name="op" value="hsr">高鐵
+                </p>
+            `;
+        }
+    }, false);
+    
+    document.getElementById("waitTime").addEventListener("change", function() {
+        const waitTimeDiv = document.getElementById("waitTimeDiv")
+        if (this.checked) {
+            waitTimeDiv.innerHTML = `
+            <p>請輸入轉乘所需時間：</p>
+                <p>
+                    <input type="number" class="setWaitTime" id="waitTimeHr" min="1" max="23" step="1" value="0">小時
+                    <input type="number" class="setWaitTime" id="waitTimeMin" min="1" max="59" step="1" value="25">分鐘
+                </p>
+            `;
+        }
+        else{
+            waitTimeDiv.innerHTML = '';
+        }
     }, false)
+
 
     const testBtn = document.getElementById('test');
     testBtn.addEventListener('click', () => {
@@ -106,7 +152,7 @@ function start(){
                 alert("如欲用現在時間請選擇自訂時間！");
                 return;
             }
-            finalISOString = new Date(queryTimeInpus.value).toISOString();
+            finalISOString = queryTimeInpus.value + ":00";
         }
         else{
             let now = new Date();
@@ -127,18 +173,50 @@ function start(){
 
         document.getElementById('result').innerHTML = '<p>搜尋中，請稍候...</p>';
 
-        const op = document.querySelector('input[name="op"]:checked').value;
-        const url = `http://localhost:3000/api/timetable?start=${startStation}&end=${endStation}&time=${finalISOString}&op=${op}`;
+        const mode = document.querySelector('input[name="mode"]:checked').value;
+        if (mode === 'search'){
+            const isNoHSR = document.getElementById("noHSR").checked;
+            const hsrCheck = isNoHSR ? 'false' : 'true';
 
-        fetch(url)
-            .then(res => res.json())
-            .then(data => {
-                renderTable(data);
-            })
-            .catch(err => {
-                document.getElementById('result').innerHTML = '<p>查詢失敗，請檢查後端是否啟動！</p>';
-                console.error(err);
-            });
+            let  waitTime = 25;
+            const hrInput = document.getElementById("waitTimeHr");
+            const minInput = document.getElementById("waitTimeMin");
+
+            if (hrInput && minInput) {
+                const hours = parseInt(hrInput.value) || 0;
+                const minutes = parseInt(minInput.value) || 0;
+                waitTime = hours * 60 + minutes;
+            }
+            else {
+                waitTime = 25; 
+            }
+
+            const url = `http://localhost:3000/api/search?start=${startStation}&end=${endStation}&time=${finalISOString}&waitTime=${waitTime}&HSRok=${hsrCheck}`;
+
+            fetch(url)
+                .then(res => res.json())
+                .then(data => {
+                    renderResult(data, waitTime);
+                })
+                .catch(err => {
+                    document.getElementById('result').innerHTML = '<p>查詢失敗，請檢查後端是否啟動！</p>';
+                    console.error(err);
+                });
+        }
+        else{
+            const op = document.querySelector('input[name="op"]:checked').value;
+            const url = `http://localhost:3000/api/timetable?start=${startStation}&end=${endStation}&time=${finalISOString}&op=${op}`;
+
+            fetch(url)
+                .then(res => res.json())
+                .then(data => {
+                    renderTable(data);
+                })
+                .catch(err => {
+                    document.getElementById('result').innerHTML = '<p>查詢失敗，請檢查後端是否啟動！</p>';
+                    console.error(err);
+                });
+        }
     });
 }
 
@@ -237,6 +315,57 @@ function addCommonStation(stationSelect){
     if (document.getElementById("endCity").value === "常用") {
         setStation("常用", "end");
     }
+}
+
+function renderResult(result, waitTime){
+    const resultDiv = document.getElementById('result');
+    if (!result.success){
+        resultDiv.innerHTML = `<p>查詢失敗</p>`;
+        return;
+    }
+    if (!result.path){
+        resultDiv.innerHTML = `<p>查無班次。</p>`;
+        return;
+    }
+    let html = '可經由以下路線：<br>';
+
+    result.path.forEach((segment, index) => {
+        const item = segment.data;
+        const isHSR = segment.title.includes("高鐵");
+        const spanClass = isHSR ? 'hsr': 'tra';
+        const trainCodeDisplay = item.isError ? `<span style="color:red;">查無班次</span>` : (item.train_code || item.TrainNo);
+        const timeDisplay = item.isError ? `---` : `${item.departure_time} ➔ ${item.arrival_time} (${item.travel_time})`;
+        const getStationName = (id) => stationNameMap[id] || id;
+
+        html += `${segment.title}：`;
+
+        html += `
+            <table class="result-table">
+                <thead>
+                    <tr>
+                        <th>類型</th>
+                        <th>車次</th>
+                        <th>${getStationName(segment.from)} ➔ ${getStationName(segment.to)}(時間)</th>
+                        <th>票價(全票)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class='badge ${spanClass}'>${item.train_type}</span></td>
+                        <td>${trainCodeDisplay}</td>
+                        <td>${timeDisplay}</td>
+                        <td>NT$ ${item.adult_price || '---'}</td>
+                    </tr>
+                </tbody>
+            </table>
+        `;
+
+        if (index < result.path.length - 1) {
+            html += `<div class="transfer-arrow">在 <b>${getStationName(segment.to)}</b> 站轉乘 (約等待 ${waitTime || 25} 分鐘)</div>`;
+        }
+    });
+
+    resultDiv.innerHTML = html;
 }
 
 function renderTable(data){
