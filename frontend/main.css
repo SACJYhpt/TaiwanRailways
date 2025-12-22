@@ -6,6 +6,7 @@ button {
     background-color: gold;  /* 測試邊界 */
     padding: 10px;
     border-radius: 8px;
+    text-align: center;
 }
 
 .setThings {
@@ -13,7 +14,7 @@ button {
     font-size: 1.5em;
 }
 
-.setChangeTime {
+.setWaitTime {
     width: 30px;
 }
 
