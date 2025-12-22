@@ -43,6 +43,7 @@ header nav{
     display: flex;
     align-items: center;
     transition: all 0.5s ease;
+    z-index: 2000;
 }
 
 header nav a{
@@ -419,3 +420,4 @@ div#tech{
 .maker-container.active .toggle-right{
     transform: translateX(200%);
 }
+
