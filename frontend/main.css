@@ -2,10 +2,13 @@ button {
     font-size: 10px;
 }
 .set {
-    width: 20%;
-    background-color: gold;  /* 測試邊界 */
-    padding: 10px;
-    border-radius: 8px;
+    width: 50%;
+/* 
+    justify-content: center;
+    align-items: center; */
+    background-color: gold;
+    padding: 30px;
+    border-radius: 12px;
     text-align: center;
 }
 
@@ -28,10 +31,12 @@ button {
 .flex-container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .flex-container>div {
-    width: auto;
     text-align: left;
     text-align: justify;
     box-sizing: border-box;
