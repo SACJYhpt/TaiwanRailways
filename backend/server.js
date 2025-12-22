@@ -1,4 +1,5 @@
 require('dotenv').config();
+const token = process.env.TRAHSR_TOKEN;
 const axios = require('axios');
 const express = require('express');
 const cors = require('cors');
@@ -10,7 +11,6 @@ app.use(cors())
 app.get('/api/timetable', async (req, res) => {
     const {start, end, time, op} = req.query;
     console.log(`正在查詢：${start} ➔ ${end}, 現在：${time}`);
-    const token = process.env.TRAHSR_TOKEN;
 
     const traURL = "https://superiorapis-creator.cteam.com.tw/manager/feature/proxy/947f9a2f1102/pub_947f9af843e4";
     const hsrURL = "https://superiorapis-creator.cteam.com.tw/manager/feature/proxy/947f9a2f1102/pub_9482561d10b9";
@@ -23,7 +23,7 @@ app.get('/api/timetable', async (req, res) => {
                 "start_station": start,
                 "end_station": end,
                 "datetime": time
-            }
+            };
             console.log(resData);
             const res = await axios.post(traURL, resData, {
                 headers: {
@@ -31,6 +31,7 @@ app.get('/api/timetable', async (req, res) => {
                     'Content-Type': 'application/json'
                 }
             });
+            console.log("台鐵原始回傳內容：", res.data);
             return res.data.map(item => ({...item, transport: 'TRA'}));
         }
 
