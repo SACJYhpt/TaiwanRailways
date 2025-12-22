@@ -4,9 +4,12 @@ const axios = require('axios');
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors())
+
+const path = require('path');
+app.use(express.static(path.join(__dirname, '../frontend')));
 
 const traURL = "https://superiorapis-creator.cteam.com.tw/manager/feature/proxy/947f9a2f1102/pub_947f9af843e4";
 const hsrURL = "https://superiorapis-creator.cteam.com.tw/manager/feature/proxy/947f9a2f1102/pub_9482561d10b9";
@@ -248,10 +251,10 @@ app.get('/api/search', async (req, res) => {
         let hub1 = findJoint(start);
         let hub2 = findJoint(end);
 
-        // if (hub1 === hub2){
-        //     hub1 = null;
-        //     hub2 = null;
-        // }
+        if (hub1 === hub2){
+            hub1 = null;
+            hub2 = null;
+        }
 
         let currentSearchTime = time;
         let routeResults = [];
