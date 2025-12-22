@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>開始</title>
+</head>
+<body>
+    <div class="flex-container">
+        <div class="set">
+            <p class="setThings">請選擇起始車站：</p>
+            <p>
+                <select id="startCity"></select>
+                <select id="startStation"></select>
+                <button id="addStartCommon">加入/刪除自常用</button>
+            </p>
+
+            <p class="setThings">請選擇結束車站：</p>
+            <p>
+                <select id="endCity"></select>
+                <select id="endStation"></select>
+                <button id="addEndCommon">加入/刪除自常用</button>
+            </p>
+
+            <p>
+                <button id="changeStation">交換起始/結束車站</button>
+            </p>
+            <hr>
+            <p class="setThings">出發時間設定：</p>
+            <p>
+                <input type="radio" name="time" value="now" id="timeNow" checked>現在時間
+                <input type="radio" name="time" value="notnow" id="timeNotNow">自訂時間
+            </p>
+            <div id="chooseTimeDiv"></div>
+            <hr>
+            <p class="setThings">條件選擇：</p>
+
+            <p>
+                查詢種類：
+                <input type="radio" name="op" value="tra" checked>台鐵
+                <input type="radio" name="op" value="hsr">高鐵
+            </p>
+
+            <p>
+                <input type="checkbox" name="mode" id="direct" checked>必須直達
+                <input type="checkbox" name="mode" id="noHSR" checked>不搭高鐵
+            </p>
+
+            <div id="changeTimeDiv"></div>
+            
+            <p>
+                <button type="button" id="test">開始查詢</button>
+                <button type="button" onclick="window.location.reload()">重新填寫</button>
+            </p>
+
+        </div>
+
+        <div class="pic">
+            <img src="test_map.png" style="width: 10px;">
+        </div>
+
+        <div class="result" id="result">
+            <table class="result-table">
+                <thead>
+                    <tr>
+                        <th>類型</th>
+                        <th>車次</th>
+                        <th>時間(出發 ➔ 到達)</th>
+                        <th>票價(全票)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge tra">自強</span></td>
+                        <td>0d00</td>
+                        <td>07:21 ➔ 19:19 (8小時10分)</td>
+                        <td>NT$ 114514</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="TRAresult1">
+                ;
+            </div>
+            <div id="HSRresult1">
+                ;
+            </div>
+            <div id="TRAresult2">
+                ;
+            </div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

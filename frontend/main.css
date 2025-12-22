@@ -1,0 +1,54 @@
+button {
+    font-size: 10px;
+}
+.set {
+    width: 20%;
+    background-color: gold;  /* 測試邊界 */
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.setThings {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.setChangeTime {
+    width: 30px;
+}
+
+.pic {
+    width: 20%;
+}
+.result {
+    width: 30%;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex-container>div {
+    width: auto;
+    text-align: left;
+    text-align: justify;
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+@media only screen and (max-width: 600px) {
+    .flex-container>div{
+        height: auto;
+        width: 100%;
+        overflow: hidden;
+    }
+}
+
+.result-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+.result-table th, .result-table td { border: 1px solid #ddd; padding: 12px; text-align: center; }
+.result-table th { background-color: #f4f4f4; }
+.badge { padding: 4px 8px; border-radius: 4px; color: white; font-weight: bold; }
+.tra { background-color: #090980; }
+.hsr { background-color: #db5426; }
