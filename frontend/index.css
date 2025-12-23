@@ -153,6 +153,17 @@ div.section .scroll::before{
     animation: pulse 3s infinite;
 }
 
+div.section .presentation{
+    position: relative;
+    font-size: 60px;
+    color: #fff;
+    transition: all 0.5s;
+}
+
+div.section .presentation:hover{
+    opacity: 0.5;
+}
+
 @keyframes pulse {
     0%, 100% {
         opacity: 0;
