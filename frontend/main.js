@@ -45,6 +45,8 @@ function start(){
     createStationNameMap();
     const startCity = document.getElementById("startCity");
     const endCity = document.getElementById("endCity");
+    const panel = document.getElementById("controlPanel"); // 抓取面板
+
     const savedCommon = localStorage.getItem("myCommonStations");
     if (savedCommon) stationList["常用"] = JSON.parse(savedCommon);
 
@@ -52,6 +54,31 @@ function start(){
     setCity(endCity);
     setStation("常用", "start");
     setStation("常用", "end");
+
+    const savedResult = localStorage.getItem("lastQueryResult");
+    if (savedResult) {
+        const lastQuery = JSON.parse(savedResult);
+        if (lastQuery.mode === 'search') {
+            renderResult(lastQuery.data, lastQuery.waitTime);
+        } 
+        else if (lastQuery.mode === 'timetable') {
+            renderTable(lastQuery.data);
+        }
+    }
+
+    if (panel) {
+        panel.addEventListener("mouseenter", () => {
+            console.log("滑鼠進入");
+            panel.classList.add("open");
+        });
+
+        panel.addEventListener("mouseleave", () => {
+            console.log("滑鼠離開");
+            panel.classList.remove("open");
+        });
+    } else {
+        console.error("找不到 ID 為 controlPanel 的元素");
+    }
 
     startCity.addEventListener("change", function() {
         setStation(this.value, "start");
@@ -103,7 +130,7 @@ function start(){
         if (this.checked){
             modeSetDiv.innerHTML = `
                 <p><input type="checkbox" name="noHSR" id="noHSR" checked>不搭高鐵</p>
-                <p><input type="checkbox" name="noHSR" id="changeTime">設定轉乘時間(預設25分鐘)</p>
+                <p><input type="checkbox" name="noHSR" id="waitTime">設定轉乘時間(預設25分鐘)</p>
                 <div id="waitTimeDiv"></div>
             `;
         }
@@ -171,6 +198,8 @@ function start(){
             return;
         }
 
+        controlPanel.classList.add('collapsed');
+        
         document.getElementById('result').innerHTML = '<p>搜尋中，請稍候...</p>';
 
         const mode = document.querySelector('input[name="mode"]:checked').value;
@@ -197,6 +226,13 @@ function start(){
                 .then(res => res.json())
                 .then(data => {
                     renderResult(data, waitTime);
+                    const saveData = {
+                        mode: 'search',
+                        data: data,
+                        waitTime: waitTime,
+                        timestamp: new Date().getTime()
+                    };
+                    localStorage.setItem("lastQueryResult", JSON.stringify(saveData));
                 })
                 .catch(err => {
                     document.getElementById('result').innerHTML = '<p>查詢失敗，請檢查後端是否啟動！</p>';
@@ -211,6 +247,12 @@ function start(){
                 .then(res => res.json())
                 .then(data => {
                     renderTable(data);
+                                const saveData = {
+                        mode: 'timetable',
+                        data: data,
+                        timestamp: new Date().getTime()
+                    };
+                    localStorage.setItem("lastQueryResult", JSON.stringify(saveData));
                 })
                 .catch(err => {
                     document.getElementById('result').innerHTML = '<p>查詢失敗，請檢查後端是否啟動！</p>';
