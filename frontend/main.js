@@ -42,13 +42,12 @@ function createStationNameMap(){
 }
 
 function start(){
+    const savedCommon = localStorage.getItem("myCommonStations");
+    if (savedCommon) stationList["常用"] = JSON.parse(savedCommon);
     createStationNameMap();
     const startCity = document.getElementById("startCity");
     const endCity = document.getElementById("endCity");
     const panel = document.getElementById("controlPanel"); // 抓取面板
-
-    const savedCommon = localStorage.getItem("myCommonStations");
-    if (savedCommon) stationList["常用"] = JSON.parse(savedCommon);
 
     setCity(startCity);
     setCity(endCity);
@@ -68,12 +67,10 @@ function start(){
 
     if (panel) {
         panel.addEventListener("mouseenter", () => {
-            console.log("滑鼠進入");
             panel.classList.add("open");
         });
 
         panel.addEventListener("mouseleave", () => {
-            console.log("滑鼠離開");
             panel.classList.remove("open");
         });
     } else {
