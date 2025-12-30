@@ -34,10 +34,33 @@ const getTRA = async (start, end, time) => {
 }
 
 const getHSR = async (start, end, time) => {
+    const HSRMoneyTable = {
+        1: [0, 40, 70, 200, 330, 480, 750, 870, 970, 1120, 1390, 1530],
+        2: [40, 0, 40, 160, 290, 430, 700, 820, 930, 1080, 1350, 1490],
+        3: [70, 40, 0, 130, 260, 400, 670, 790, 900, 1050, 1320, 1460],
+        4: [200, 160, 130, 0, 130, 280, 540, 670, 780, 920, 1190, 1330],
+        5: [330, 290, 260, 130, 0, 140, 410, 540, 640, 790, 1060, 1200],
+        6: [480, 430, 400, 280, 140, 0, 270, 390, 500, 640, 920, 1060],
+        7: [750, 700, 670, 540, 410, 270, 0, 130, 230, 380, 650, 790],
+        8: [870, 820, 790, 670, 540, 390, 130, 0, 110, 250, 530, 670],
+        9: [970, 930, 900, 780, 640, 500, 230, 110, 0, 150, 420, 560],
+        10: [1120, 1080, 1050, 920, 790, 640, 380, 250, 150, 0, 280, 410],
+        11: [1390, 1350, 1320, 1190, 1060, 920, 650, 530, 420, 280, 0, 140],
+        12: [1530, 1490, 1460, 1330, 1200, 1060, 790, 670, 560, 410, 140, 0]
+    };
+
+    const startNo = parseInt(start, 10);
+    const endNo = parseInt(end, 10);
+
+    let price = 0;
+    if (HSRMoneyTable[startNo]){
+        price = HSRMoneyTable[startNo][endNo - 1];
+    }
+
     console.log(`高鐵 API 請求中：${start} -> ${end}`);
     const resData = {
-        "start_station_no": parseInt(start, 10),
-        "end_station_no": parseInt(end, 10),
+        "start_station_no": startNo,
+        "end_station_no": endNo,
         "datetime": time
     }
     console.log(resData);
@@ -60,7 +83,7 @@ const getHSR = async (start, end, time) => {
         departure_time: item.departure_time,
         arrival_time: item.destination_time,
         travel_time: item.duration,
-        adult_price: 0 //無回傳價格
+        adult_price: price
     }));
 }
 
