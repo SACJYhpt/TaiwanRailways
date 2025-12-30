@@ -134,9 +134,19 @@ async function findHSR(start, end, time, waitTime, routeResults){
         '4272': '11',      // 沙崙 - 臺南
         '4340': '12'       // 新左營 - 左營
     };
-    const hubIDs = Object.keys(transferMap).map(Number).sort((a, b) => a - b);
-    let mainStart=null;
-    let mainEnd=null;
+
+    const singedID = (id) => { //超過玉里站就去南港而非左營
+        const num = Number(id);
+        if (num >= 6110){
+            return num - 10000;
+        }
+        return num;
+    }
+
+    const unsortedIDs = Object.keys(transferMap).map(Number);
+    const hubIDs = [...unsortedIDs].sort((a, b) => singedID(a)-singedID(b));
+    let mainStart = null;
+    let mainEnd = null;
     let nextTime = time;
     
     //北上 or 南下
@@ -150,7 +160,7 @@ async function findHSR(start, end, time, waitTime, routeResults){
     }
 
     if (!mainStart || !mainEnd || mainStart === mainEnd){
-        console.log('無高鐵可以搭')
+        console.log('無高鐵可以搭或不須搭高鐵')
         nextTime = await findTRA('臺鐵主線', start, end, time, waitTime, routeResults);
         return nextTime;
     }
@@ -173,10 +183,13 @@ async function findHSR(start, end, time, waitTime, routeResults){
 
     const legHSR = await getHSR(hsrStartNo, hsrEndNo, time);
     if (legHSR && legHSR.length > 0) {
+        const displayFrom = traToHsrMap[startKey] || startKey;
+        const displayTo = traToHsrMap[endKey] || endKey;
+
         routeResults.push({
             title: '高鐵線路',
-            from: startKey,
-            to: endKey,
+            from: displayFrom,
+            to: displayTo,
             data: legHSR[0]
         });
         
@@ -245,6 +258,13 @@ async function findTRA(title, start, end, time, waitTime, routeResults){
 
 app.get('/api/search', async (req, res) => {
     let {start, end, time, waitTime = 25, HSRok} = req.query;
+    let currentSearchTime = time;
+    let routeResults = [];
+
+    if (parseInt(start<13) || parseInt(end<13)){
+        currentSearchTime = findHSR(start, end, time, waitTime, routeResults);
+    }
+
     try{
         console.log('start:'+start);
         console.log('end:'+end);
@@ -255,9 +275,6 @@ app.get('/api/search', async (req, res) => {
             hub1 = null;
             hub2 = null;
         }
-
-        let currentSearchTime = time;
-        let routeResults = [];
 
         console.log('hub1:'+hub1);
         console.log('hub2:'+hub2);
