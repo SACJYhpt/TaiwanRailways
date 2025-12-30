@@ -16,7 +16,7 @@ const traURL = "https://superiorapis-creator.cteam.com.tw/manager/feature/proxy/
 const hsrURL = "https://superiorapis-creator.cteam.com.tw/manager/feature/proxy/947f9a2f1102/pub_9482561d10b9";
 
 const getTRA = async (start, end, time) => {
-    console.log(`臺鐵 API 請求中：${start} -> ${end}`);
+    console.log(`臺鐵 API 請求中：${start} -> ${end}，時間為${time}`);
     const resData = {
         "start_station": start,
         "end_station": end,
@@ -57,7 +57,7 @@ const getHSR = async (start, end, time) => {
         price = HSRMoneyTable[startNo][endNo - 1];
     }
 
-    console.log(`高鐵 API 請求中：${start} -> ${end}`);
+    console.log(`高鐵 API 請求中：${start} -> ${end}，時間為${time}`);
     const resData = {
         "start_station_no": startNo,
         "end_station_no": endNo,
