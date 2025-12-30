@@ -205,7 +205,7 @@ async function findHSR(start, end, time, waitTime, routeResults){
         time = await findTRA('臺鐵主線', start, startKey, time, waitTime, routeResults);
     }
 
-    console.log(`台鐵站 ${startKey} (高鐵 ${hsrStartNo}) -> 台鐵站 ${endKey} (高鐵 ${hsrEndNo})`);
+    console.log(`臺鐵高鐵轉換：台鐵站 ${startKey} (高鐵 ${hsrStartNo}) -> 台鐵站 ${endKey} (高鐵 ${hsrEndNo})`);
 
     const legHSR = await getHSR(hsrStartNo, hsrEndNo, time);
     if (legHSR && legHSR.length > 0) {
@@ -306,6 +306,7 @@ app.get('/api/search', async (req, res) => {
         console.log('hub2:'+hub2);
         if (hub1){
             currentSearchTime = await findTRA('前往臺鐵主線', start, hub1, currentSearchTime, waitTime, routeResults);
+            console.log(`時間為：${currentSearchTime}`);
         }
 
         const mainStart = hub1 || start;
@@ -318,10 +319,12 @@ app.get('/api/search', async (req, res) => {
             else{
                 currentSearchTime = await findTRA('臺鐵主線', mainStart, mainEnd, currentSearchTime, waitTime, routeResults);
             }
+            console.log(`時間為：${currentSearchTime}`);
         }
 
         if (hub2){
             currentSearchTime = await findTRA('離開臺鐵主線', hub2, end, currentSearchTime, waitTime, routeResults);
+            console.log(`時間為：${currentSearchTime}`);
         }
 
         res.json({
