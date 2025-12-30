@@ -144,7 +144,7 @@ async function findHSR(start, end, time, waitTime, routeResults){
         return num;
     }
 
-    const hubIDs = Object.keys(transferMap).map(Number).sort((a, b) => (singedID(a) ,singedID(b)));
+    const hubIDs = Object.keys(transferMap).map(Number).sort((a, b) => singedID(a),singedID(b));
     //const hubIDs = [...unsignIDs].sort((a, b) => singedID(a)-singedID(b));
     let mainStart = null;
     let mainEnd = null;
@@ -160,7 +160,9 @@ async function findHSR(start, end, time, waitTime, routeResults){
         mainEnd = hubIDs.find(id => singedID(id) >= singedID(end));
     }
 
-    if (!mainStart || !mainEnd || mainStart === mainEnd){
+    const canTakeHSR = mainStart && mainEnd && mainStart != mainEnd && (isSouthBound ? singedID(mainStart) < singedID(mainEnd) : singedID(mainStart) > singedID(mainEnd))
+
+    if (!canTakeHSR){
         console.log('無高鐵可以搭或不須搭高鐵')
         nextTime = await findTRA('臺鐵主線', start, end, time, waitTime, routeResults);
         return nextTime;
@@ -184,8 +186,8 @@ async function findHSR(start, end, time, waitTime, routeResults){
 
     const legHSR = await getHSR(hsrStartNo, hsrEndNo, time);
     if (legHSR && legHSR.length > 0) {
-        const displayFrom = traToHsrMap[startKey] || startKey;
-        const displayTo = traToHsrMap[endKey] || endKey;
+        const displayFrom = transferMap[startKey] || startKey;
+        const displayTo = transferMap[endKey] || endKey;
 
         routeResults.push({
             title: '高鐵線路',
