@@ -29,7 +29,7 @@ const getTRA = async (start, end, time) => {
             'Content-Type': 'application/json'
         }
     });
-    console.log("台鐵原始回傳內容：", res.data);
+    // console.log("台鐵原始回傳內容：", res.data);
     return res.data.map(item => ({...item, transport: 'TRA'}));
 }
 
