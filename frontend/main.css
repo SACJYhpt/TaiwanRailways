@@ -1,20 +1,54 @@
 body {
-    background-color: #c9d6ff;
-    background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+    background: linear-gradient(135deg, #1e1e2f, #4a4a78);
+    overflow: hidden;
 }
 
+select{
+    font-size: 15px;
+    cursor: pointer;
+}
+
+
+input {
+    font-size: 15px;
+    cursor: pointer;
+}
 button {
     font-size: 10px;
+    cursor: pointer;
 }
+
+.submit{
+    background-color: #512da8;
+    color: #fff;
+    font-size: 15px;
+    padding: 10px 45px;
+    border: 1px solid white;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.reload{
+    background-color: #512da8;
+    color: #fff;
+    font-size: 15px;
+    padding: 10px 45px;
+    border: 1px solid white;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
 .set {
+    color: rgb(228, 224, 224);
     border-radius: 0 0 20px 20px;
     position: fixed;
     top: 0;
-    left: 0;
+    left: 0%;
     width: 100%;
-    background: gold;
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    box-shadow: 0 4px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 4px rgba(0,0,0,0.37);
+    border: 1px  solid rgba(255, 255, 255, 0.2);
     z-index: 1000;
     padding: 20px;
     padding-top: 0px;
