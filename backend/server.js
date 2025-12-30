@@ -144,7 +144,7 @@ async function findHSR(start, end, time, waitTime, routeResults){
         return num;
     }
 
-    const hubIDs = Object.keys(transferMap).map(Number).sort((a, b) => singedID(a),singedID(b));
+    const hubIDs = Object.keys(transferMap).map(Number).sort((a, b) => singedID(a)-singedID(b));
     //const hubIDs = [...unsignIDs].sort((a, b) => singedID(a)-singedID(b));
     let mainStart = null;
     let mainEnd = null;
