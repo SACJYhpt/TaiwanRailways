@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors())
 
 const path = require('path');
+const { sourceMapsEnabled } = require('process');
 app.use(express.static(path.join(__dirname, '../frontend')));
 
 const traURL = "https://superiorapis-creator.cteam.com.tw/manager/feature/proxy/947f9a2f1102/pub_947f9af843e4";
@@ -143,20 +144,20 @@ async function findHSR(start, end, time, waitTime, routeResults){
         return num;
     }
 
-    const unsortedIDs = Object.keys(transferMap).map(Number);
-    const hubIDs = [...unsortedIDs].sort((a, b) => singedID(a)-singedID(b));
+    const hubIDs = Object.keys(transferMap).map(Number).sort((a, b) => (singedID(a) ,singedID(b)));
+    //const hubIDs = [...unsignIDs].sort((a, b) => singedID(a)-singedID(b));
     let mainStart = null;
     let mainEnd = null;
     let nextTime = time;
     
     //北上 or 南下
-    const isSouthBound = Number(start) < Number(end);
+    const isSouthBound = singedID(start) < singedID(end);
     if (isSouthBound) {
-        mainStart = hubIDs.find(id => id >= Number(start));
-        mainEnd = [...hubIDs].reverse().find(id => id <= Number(end));
+        mainStart = hubIDs.find(id => singedID(id) >= singedID(start));
+        mainEnd = [...hubIDs].reverse().find(id => singedID(id) <= singedID(end));
     } else {
-        mainStart = [...hubIDs].reverse().find(id => id <= Number(start));
-        mainEnd = hubIDs.find(id => id >= Number(end));
+        mainStart = [...hubIDs].reverse().find(id => singedID(id) <= singedID(start));
+        mainEnd = hubIDs.find(id => singedID(id) >= singedID(end));
     }
 
     if (!mainStart || !mainEnd || mainStart === mainEnd){
@@ -176,7 +177,7 @@ async function findHSR(start, end, time, waitTime, routeResults){
     }
 
     if (startKey !== start){
-        time = await findTRA('前往搭乘高鐵', start, startKey, time, waitTime, routeResults);
+        time = await findTRA('臺鐵主線', start, startKey, time, waitTime, routeResults);
     }
 
     console.log(`台鐵站 ${startKey} (高鐵 ${hsrStartNo}) -> 台鐵站 ${endKey} (高鐵 ${hsrEndNo})`);
