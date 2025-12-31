@@ -1,6 +1,7 @@
 body {
     background: linear-gradient(135deg, #1e1e2f, #4a4a78);
     overflow: hidden;
+    color: whitesmoke;
 }
 
 select{
@@ -39,7 +40,7 @@ button {
 }
 
 .set {
-    color: rgb(228, 224, 224);
+    color: white;
     border-radius: 0 0 20px 20px;
     position: fixed;
     top: 0;
@@ -133,12 +134,32 @@ button {
     }
 }
 
-.result-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-.result-table th, .result-table td { border: 1px solid #ddd; padding: 12px; text-align: center; }
-.result-table th { background-color: #f4f4f4; }
-.badge { padding: 4px 8px; border-radius: 4px; color: white; font-weight: bold; }
-.tra { background-color: #090980; }
-.hsr { background-color: #db5426; }
+.result-table { 
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+.result-table th, .result-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+.result-table th {
+    background: rgba(255, 255, 255, 0.1);
+    font-weight: bold;
+}
+.badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+}
+.tra {
+    background-color: #090980;
+}
+.hsr {
+    background-color: #db5426;
+}
 
 /* #result-drawer {
     position: fixed;
