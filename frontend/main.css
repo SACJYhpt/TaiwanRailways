@@ -128,9 +128,7 @@ button {
 
 @media only screen and (max-width: 600px) {
     .flex-container>div{
-        height: auto;
         width: 100%;
-        overflow: hidden;
     }
 }
 
