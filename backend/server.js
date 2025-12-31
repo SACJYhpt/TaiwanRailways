@@ -132,7 +132,7 @@ function addMinutes(isoTimeStr, minutes) {
         return isoTimeStr;
     }
 
-    data.setTime(date.getTime() + (minutes * 60 * 1000));
+    date.setTime(date.getTime() + (minutes * 60 * 1000));
 
     let year = date.getFullYear();
     let month = String(date.getMonth() + 1).padStart(2, '0');
@@ -296,7 +296,7 @@ app.get('/api/search', async (req, res) => {
     let currentSearchTime = time;
     let routeResults = [];
 
-    if (parseInt(start<13) || parseInt(end<13)){
+    if ((parseInt(start)<13) || (parseInt(end)<13)){
         currentSearchTime = findHSR(start, end, time, waitTime, routeResults);
     }
 
