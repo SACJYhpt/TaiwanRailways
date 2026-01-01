@@ -42,6 +42,8 @@ button {
     color: white;
     border-radius: 0 0 20px 20px;
     position: fixed;
+    text-align: center;
+    justify-content: center;
     top: 0;
     left: 0%;
     width: 100%;
@@ -57,11 +59,6 @@ button {
     box-sizing: border-box;
     transform: translateY(calc(-100% + 35px));
     transition: transform 0.4s ease
-}
-
-.set-content {
-    text-align: center;
-    justify-content: center;
 }
 
 .set::-webkit-scrollbar {
@@ -125,9 +122,64 @@ button {
     overflow-x: hidden;
 }
 
+.mobileDiv {
+    width: 100%;
+    padding: 0;
+}
+
 @media only screen and (max-width: 600px) {
-    .flex-container>div{
+    .mobileDiv {
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        margin-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .set {
+        max-height: 50vh;
+        border-radius: 20px 20px 0 0;
+        bottom: 0;
+        top: auto;
+        box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
+        border-bottom: none;
+        transform: translateY(calc(100% - 50px));
+        transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .set-station, .set-btn {
+        text-align: center;
+    }
+
+    .set-stationDiv {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
         width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .stationBox {
+        flex: 1;
+        text-align: center;
+    }
+
+    .stationBox select {
+        width: 90%;
+        margin-bottom: 5px;
+    }
+
+    .stationBox button {
+        display: block;
+        margin: 5px auto;
+    }
+    
+    .set.open {
+        transform: translateY(0) !important;
+    }
+    
+    .result {
+        padding-top: 0px;
     }
 }
 
