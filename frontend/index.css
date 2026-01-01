@@ -432,3 +432,25 @@ div#tech{
 .maker-container.active .toggle-right{
     transform: translateX(200%);
 }
+
+@media only screen and (max-width: 600px) {
+    .maker-wrapper{
+        height: auto;
+        padding: 40px 0;
+        width: 100%;
+    }
+    .section{
+        width: 100%;
+        text-align: center;
+    }
+    .section h2{
+        font-size: 3rem;
+    }
+    .section2{
+        width: 100%;
+        text-align: center;
+    }
+    .section2 h2{
+        font-size: 3rem;
+    }
+}
