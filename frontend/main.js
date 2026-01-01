@@ -259,7 +259,28 @@ function start(){
     });
 }
 
+function handleRWD(){
+    const stationDiv = document.getElementById('stationDiv');
+    const btnDiv = document.getElementById('btnDiv');
+    const mobileDiv = document.getElementById('mobileDiv');
+    const controlPanel = document.getElementById('controlPanel');
+    if (window.innerWidth <= 600){
+        if (!mobileDiv.contains(stationDiv)){
+            mobileDiv.appendChild(stationDiv);
+            mobileDiv.appendChild(btnDiv);
+        }
+    }
+    else{
+        if (!controlPanel.contains(stationDiv)){
+            controlPanel.insertBefore(stationDiv, controlPanel.firstChild);
+            controlPanel.append(btnDiv);
+        }
+    }
+}
+
 window.addEventListener("load", start, false);
+window.addEventListener('load', handleRWD, false);
+window.addEventListener('resize', handleRWD, false);
 
 function setCity(citySelection){
     citySelection.innerHTML = '';
