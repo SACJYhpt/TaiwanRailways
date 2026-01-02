@@ -132,8 +132,8 @@ button {
         padding: 20px;
         background: rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(10px);
-        margin-bottom: 10px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        /* margin-bottom: 10px; */
+        /* border-bottom: 1px solid rgba(255, 255, 255, 0.2); */
     }
 
     .set {
@@ -149,14 +149,13 @@ button {
 
     .set-station, .set-btn {
         text-align: center;
+        font-size: 0.3em;
     }
 
     .set-stationDiv {
         display: flex;
         justify-content: space-between;
-        gap: 15px;
         width: 100%;
-        margin-bottom: 20px;
     }
 
     .stationBox {
@@ -165,13 +164,14 @@ button {
     }
 
     .stationBox select {
-        width: 90%;
+        width: 40%;
         margin-bottom: 5px;
     }
 
     .stationBox button {
         display: block;
         margin: 5px auto;
+        box-sizing: border-box;
     }
     
     .set.open {
@@ -179,7 +179,8 @@ button {
     }
     
     .result {
-        padding-top: 0px;
+        padding-top: 0%;
+        padding-bottom: 300x;
     }
 }
 
@@ -209,37 +210,3 @@ button {
 .hsr {
     background-color: #db5426;
 }
-
-/* #result-drawer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 80vh;
-    background: white;
-    box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
-    border-radius: 20px 20px 0 0;
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-    z-index: 1000;
-    
-    transform: translateY(calc(80vh - 60px));
-}
-
-#result-drawer.drawer-open {
-    transform: translateY(0);
-}
-
-#drawer-handle {
-    width: 40px;
-    height: 5px;
-    background: #ccc;
-    border-radius: 10px;
-    margin: 12px auto;
-    cursor: pointer;
-}
-
-.drawer-content {
-    padding: 0 20px 20px;
-    overflow-y: auto;
-    height: calc(100% - 40px);
-} */
